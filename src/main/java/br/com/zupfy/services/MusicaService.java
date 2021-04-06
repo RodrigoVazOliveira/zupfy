@@ -13,14 +13,16 @@ import java.util.Optional;
 @Service
 public class MusicaService {
 
-    @Autowired
     private MusicaRepository musicaRepository;
-
-    @Autowired
     private BandaService bandaService;
+    private AlbumService albumService;
 
     @Autowired
-    private AlbumService albumService;
+    public MusicaService(MusicaRepository musicaRepository, BandaService bandaService, AlbumService albumService) {
+        this.musicaRepository = musicaRepository;
+        this.bandaService = bandaService;
+        this.albumService = albumService;
+    }
 
     public Musica gravarMusica(Musica musica) {
         try {
