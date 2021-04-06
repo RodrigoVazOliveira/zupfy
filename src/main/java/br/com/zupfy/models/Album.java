@@ -13,7 +13,7 @@ public class Album {
     private String nome;
     private Integer anoLancamento;
 
-    @OneToMany(mappedBy = "musicas")
+    @OneToMany(mappedBy = "album")
     private List<Musica> musicas;
 
     public Album() {
