@@ -2,6 +2,7 @@ package br.com.zupfy.dtos;
 
 import br.com.zupfy.models.Album;
 import br.com.zupfy.models.Musica;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ public class AlbumMusicaDTO {
     private Integer id;
     private String nome;
     private Integer anoLancamento;
+    @JsonIgnoreProperties({"album", "banda"})
     private List<MusicaDTO> musicas;
 
     public AlbumMusicaDTO() {
@@ -72,7 +74,17 @@ public class AlbumMusicaDTO {
         musicaDTO.setNomeMusica(obj.getNomeMusica());
         musicaDTO.setDuracao(obj.getDuracao());
         musicaDTO.setEnderecoMusica(obj.getEnderecoMusica());
-        musicaDTO.setBanda(obj.getBanda());
+        musicaDTO.setBanda(BandaDTO.converterBandaParaBandaDTO(obj.getBanda()));
         return musicaDTO;
+    }
+
+    public static Iterable<AlbumMusicaDTO> converterListaAlbumParaListaAlbumMusicaDTO(Iterable<Album> albums) {
+        List<AlbumMusicaDTO> albumMusicaDTOs = new ArrayList<>();
+
+        for (Album album : albums) {
+            albumMusicaDTOs.add(converterAlbumParaAlbumMusicaDTO(album));
+        }
+
+        return albumMusicaDTOs;
     }
 }

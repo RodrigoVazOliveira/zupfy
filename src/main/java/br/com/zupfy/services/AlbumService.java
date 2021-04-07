@@ -1,5 +1,6 @@
 package br.com.zupfy.services;
 
+import br.com.zupfy.dtos.FiltrarAlbumDTO;
 import br.com.zupfy.models.Album;
 import br.com.zupfy.repositories.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,16 @@ public class AlbumService {
         }
 
         return album.get();
+    }
+
+    public Iterable<Album> obterTodosAlbums() {
+        return albumRepository.findAll();
+    }
+
+    public Iterable<Album> obterAlbunsPorNome(FiltrarAlbumDTO filtrarAlbumDTO) {
+        if (filtrarAlbumDTO.getNome() == null) {
+            return obterTodosAlbums();
+        }
+        return albumRepository.findByNome(filtrarAlbumDTO.getNome());
     }
 }

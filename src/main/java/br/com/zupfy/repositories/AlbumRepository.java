@@ -4,4 +4,5 @@ import br.com.zupfy.models.Album;
 import org.springframework.data.repository.CrudRepository;
 
 public interface AlbumRepository extends CrudRepository<Album, Integer> {
+    Iterable<Album> findByNome(String nome);
 }

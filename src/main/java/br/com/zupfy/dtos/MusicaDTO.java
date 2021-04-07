@@ -1,6 +1,6 @@
 package br.com.zupfy.dtos;
 
-import br.com.zupfy.models.Banda;
+import br.com.zupfy.models.Musica;
 
 import java.time.LocalTime;
 
@@ -9,33 +9,34 @@ public class MusicaDTO {
     private String nomeMusica;
     private LocalTime duracao;
     private String enderecoMusica;
-    private Banda banda;
+    private BandaDTO banda;
+    private SaidaMusicaAlbumDTO album;
 
     public MusicaDTO() {
     }
 
-    public int getId() {
-        return id;
-    }
+        public int getId() {
+            return id;
+        }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+        public void setId(int id) {
+            this.id = id;
+        }
 
-    public String getNomeMusica() {
-        return nomeMusica;
-    }
+        public String getNomeMusica() {
+            return nomeMusica;
+        }
 
-    public void setNomeMusica(String nomeMusica) {
-        this.nomeMusica = nomeMusica;
-    }
+        public void setNomeMusica(String nomeMusica) {
+            this.nomeMusica = nomeMusica;
+        }
 
-    public LocalTime getDuracao() {
-        return duracao;
-    }
+        public LocalTime getDuracao() {
+            return duracao;
+        }
 
-    public void setDuracao(LocalTime duracao) {
-        this.duracao = duracao;
+        public void setDuracao(LocalTime duracao) {
+            this.duracao = duracao;
     }
 
     public String getEnderecoMusica() {
@@ -46,11 +47,30 @@ public class MusicaDTO {
         this.enderecoMusica = enderecoMusica;
     }
 
-    public Banda getBanda() {
+    public BandaDTO getBanda() {
         return banda;
     }
 
-    public void setBanda(Banda banda) {
+    public void setBanda(BandaDTO banda) {
         this.banda = banda;
+    }
+
+    public SaidaMusicaAlbumDTO getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(SaidaMusicaAlbumDTO album) {
+        this.album = album;
+    }
+
+    public static MusicaDTO converterMusicaParaMusicaDTO(Musica musica) {
+        MusicaDTO musicaDTO = new MusicaDTO();
+        musicaDTO.setNomeMusica(musica.getNomeMusica());
+        musicaDTO.setId(musica.getId());
+        musicaDTO.setDuracao(musica.getDuracao());
+        musicaDTO.setEnderecoMusica(musica.getEnderecoMusica());
+        musicaDTO.setBanda(BandaDTO.converterBandaParaBandaDTO(musica.getBanda()));
+        musicaDTO.setAlbum(SaidaMusicaAlbumDTO.converterModelParaDto(musica));
+        return musicaDTO;
     }
 }
