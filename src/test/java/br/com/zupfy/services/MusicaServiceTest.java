@@ -122,5 +122,25 @@ public class MusicaServiceTest {
         });
     }
 
+    @Test
+    public void testarAtualizacaoDeMusicaOk() {
+        musicaTest.setId(1);
+        Mockito.when(musicaRepository.existsById(Mockito.anyInt())).thenReturn(true);
+        Mockito.when(bandaService.buscarBandaPeloId(Mockito.anyInt())).thenReturn(bandaTest);
+        Mockito.when(musicaRepository.save(Mockito.any(Musica.class))).thenReturn(musicaTest);
+
+        Musica musicaAtualizada = musicaService.atualizarMusica(musicaTest);
+
+        Assertions.assertEquals(musicaAtualizada, musicaTest);
+    }
+
+    @Test
+    public void testarAtualizacaoDeMusicaError() {
+        musicaTest.setId(1);
+        Mockito.when(musicaRepository.existsById(Mockito.anyInt())).thenReturn(false);
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            musicaService.atualizarMusica(musicaTest);
+        });
+    }
 
 }
