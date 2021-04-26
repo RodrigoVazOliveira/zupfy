@@ -4,4 +4,5 @@ import br.com.zupfy.models.Banda;
 import org.springframework.data.repository.CrudRepository;
 
 public interface BandaRepository extends CrudRepository<Banda, Integer> {
+    Iterable<Banda> findByNome(String nome);
 }
