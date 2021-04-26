@@ -5,7 +5,6 @@ import br.com.zupfy.repositories.BandaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,5 +62,13 @@ public class BandaService {
 
     public void deletarBanda(int id){
         bandaRepository.deleteById(id);
+    }
+
+    public Iterable<Banda> pesquisarBandaPorNome(String nome) {
+        if (nome == null) {
+            return bandaRepository.findAll();
+        }
+
+        return bandaRepository.findByNome(nome);
     }
 }

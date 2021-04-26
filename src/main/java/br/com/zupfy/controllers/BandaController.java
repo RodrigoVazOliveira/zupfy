@@ -54,4 +54,8 @@ public class BandaController {
         bandaService.deletarBanda(id);
     }
 
+    @GetMapping("buscar")
+    public Iterable<Banda> pesquisarBandaPorNome(@RequestParam(required = false) String nome) {
+        return bandaService.pesquisarBandaPorNome(nome);
+    }
 }
